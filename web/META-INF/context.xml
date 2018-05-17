@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/SACoMe">
+    <ResourceLink global="jdbc/sacomeDB" name="jdbc/sacomeDBlocal" type="javax.sql.DataSource"/>
+</Context>

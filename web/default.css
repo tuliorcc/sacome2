@@ -1,0 +1,176 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    text-align: center;
+    padding-top: 52px;
+    background: #fcfcfc;
+    margin: 0;
+    font-family: Verdana;
+}
+
+div#top-bar {
+    display: block;
+    width: 100%;
+    height: 52px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #4cab60;
+    color: #fff;
+    text-align: left;
+    padding: 0px 12px;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+div#top-bar>span {
+    line-height: 52px;
+    font-size: 25px;
+    cursor: default;
+}
+
+div#top-bar>a {
+    display: block;
+    float: right;
+    line-height: 52px;
+    font-size: 18px;
+    text-decoration: none;
+    color: #fff;
+    vertical-align: top;
+}
+
+div.btts {
+    text-align: center;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+div.btts>a {
+    display: inline-block;
+    margin: 12px 10px;
+    background: #4cab60;
+    padding: 12px 14px;
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 4px 5px #ccc;
+}
+
+div#top-bar>a:hover, div.btts>a:hover, table a:hover, form.boxForm a:hover, div.box.tBox>div a:hover  {
+    text-decoration: underline;
+}
+
+div.box {
+    margin-top: 20px;
+    width: 740px;
+    margin: auto auto 20px auto;
+    border: 1px solid #4cab60;
+    box-shadow: 4px 5px #ccc;
+}
+
+div.box.tBox {
+    width: 560px;
+    margin-bottom: 12px;
+}
+
+div.box.pBox {
+    width: 560px;
+}
+
+div.box.mBox {
+    width: 640px;
+}
+
+div.box>div:first-child {
+    display: block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #4cab60;
+    color: #fff;
+    text-align: left;
+    padding-left: 10px;
+    font-size: 24px;
+    cursor: default;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+div.box:not(.tBox)>div:last-child {
+    display: block;
+    width: 100%;
+    background: #fff;
+    text-align: left;
+    padding: 8px 10px 10px 10px;
+    font-size: 16px;
+}
+
+div.box.tBox>div a {
+    display: block;
+    float: right;
+    line-height: 40px;
+    font-size: 17px;
+    text-decoration: none;
+    color: #fff;
+    vertical-align: top;
+    margin-right: 10px;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+tr:nth-child(odd):not(:first-of-type) {
+    background: #caf2c7;
+}
+
+table a, form.boxForm a {
+    color: #419453;
+    text-decoration: none;
+}
+
+form.boxForm>label {
+    display: block;
+    margin: 3px auto;
+    width: 90%;
+}
+
+form.boxForm>input, form.boxForm>select {
+    display: block;
+    margin: 5px auto;
+    width: 90%;
+}
+
+form.boxForm>input[type="text"], form.boxForm>input[type="password"], 
+form.boxForm>input[type="date"], form.boxForm>select {
+    background: #fff;
+    border: 1px solid #419453;
+    height: 30px;
+}
+
+form.boxForm>input[type="submit"] {
+    color: #fff;
+    background: #419453;
+    height: 30px;
+    border: 0;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+ul.erro {
+    margin: 0;
+    padding-left: 20px;
+}
+
+span.campo {
+    color: #419453;
+    font-weight: bold;
+}
