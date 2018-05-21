@@ -5,13 +5,14 @@
  */
 package sacome.beans;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author tulio
  */
-public class Consulta {
+public class Consulta implements Serializable {
     private int id;
     private String cpf, crm, dataString;
     private Date dataConsulta;

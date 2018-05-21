@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
     <servlet>
         <servlet-name>AddMedicoServlet</servlet-name>
         <servlet-class>sacome.servlets.AddMedicoServlet</servlet-class>
@@ -40,53 +44,33 @@
         <servlet-name>AddConsultaServlet</servlet-name>
         <servlet-class>sacome.servlets.AddConsultaServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>AddMedicoServlet</servlet-name>
-        <url-pattern>/admin/addMedico</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GravarMedicoServlet</servlet-name>
-        <url-pattern>/admin/gravarMedico</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddPacienteServlet</servlet-name>
-        <url-pattern>/admin/addPaciente</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GravarPacienteServlet</servlet-name>
-        <url-pattern>/admin/gravarPaciente</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>VerMedicosServlet</servlet-name>
-        <url-pattern>/listaMedicos</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AdminLoginServlet</servlet-name>
-        <url-pattern>/admin</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>PacienteLoginServlet</servlet-name>
-        <url-pattern>/paciente</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>MedicoLoginServlet</servlet-name>
-        <url-pattern>/medico</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GravarConsultaServlet</servlet-name>
-        <url-pattern>/paciente/gravarConsulta</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddConsultaServlet</servlet-name>
-        <url-pattern>/paciente/addConsulta</url-pattern>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    <error-page>
+    <welcome-file-list>
+        <welcome-file>faces/index.xhtml</welcome-file>
+    </welcome-file-list>
+     <error-page>
         <error-code>404</error-code>
-        <location>/erro.jsp</location>
+        <location>/faces/erro.xhtml</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/faces/erro.xhtml</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/faces/erro.xhtml</location>
     </error-page>
 </web-app>

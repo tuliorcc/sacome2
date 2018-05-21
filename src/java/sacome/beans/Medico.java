@@ -5,11 +5,13 @@
  */
 package sacome.beans;
 
+import java.io.Serializable;
+
 /**
  *
  * @author tulio
  */
-public class Medico {
+public class Medico implements Serializable{
     private int id;
     private String nome, senha, especialidade, crm;
 

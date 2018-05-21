@@ -5,13 +5,14 @@
  */
 package sacome.beans;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author tulio
  */
-public class Paciente {
+public class Paciente implements Serializable{
     private int id;
     private String nome, senha, telefone, cpf, sexo;
     private Date dataDeNascimento;
