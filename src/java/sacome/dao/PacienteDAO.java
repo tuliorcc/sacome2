@@ -12,12 +12,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
+import javax.annotation.Resource;
+import javax.enterprise.context.RequestScoped;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 /**
  *
  * @author tulio
  */
+@RequestScoped
 public class PacienteDAO {
      private final static String CRIAR_PACIENTE_SQL = "insert into paciente"
             + " (cpf, nome, senha, telefone, dataDeNascimento, sexo)"
@@ -34,12 +37,9 @@ public class PacienteDAO {
         + " from paciente"
         + " where cpf=? and senha=?";
     
+    @Resource(name = "jdbc/sacomeDBlocal")
     DataSource dataSource;
 
-
-    public PacienteDAO(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
     
     public Paciente gravarPaciente(Paciente u) throws SQLException, NamingException {
         try (Connection con = dataSource.getConnection();

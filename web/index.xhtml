@@ -7,13 +7,14 @@
         <h:outputStylesheet library="css" name="default.css"/>
     </h:head>
     <h:body>
-        <h1>Bem-vindo ao bolão da Copa 2010!</h1>
+        <h1>SACoMe 2</h1>
         <h:messages globalOnly="true" />
         <p>Escolha o que deseja fazer:</p>
         <h:form>
             <h:commandLink action="medicoForm">Adicionar Medico</h:commandLink><br/>
             <h:commandLink action="#{listaMedicos.verTodosMedicos()}">Listar Medicos</h:commandLink><br/>
             <h:commandLink action="#{listaMedicos.verTodosMedicos('Neurologia')}">Listar apenas Neurologistas</h:commandLink><br/>
+            <h:commandLink action="pacienteForm">Cadastrar Paciente</h:commandLink><br/>
         </h:form>
     </h:body>
 </html>

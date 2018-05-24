@@ -41,7 +41,6 @@ public class NovaConsulta implements Serializable {
     @PostConstruct
    public void init() {
 //       medicoDao = new MedicoDAO(dataSource);
-       pacienteDao = new PacienteDAO(dataSource);
        consultaDao = new ConsultaDAO(dataSource);
 
    }
