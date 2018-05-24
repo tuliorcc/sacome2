@@ -37,7 +37,11 @@ public class ListaMedicos implements Serializable {
     }
     
      public String verTodosMedicos(String especialidade) throws SQLException, NamingException {
+        if (especialidade == ""){
+        listaMedicos = medicoDAO.listarTodosMedicos();
+        }else{
         listaMedicos = medicoDAO.listarTodosMedicosPorEspecialidade(especialidade);
+        }
         return "listaMedicos";
     }
 

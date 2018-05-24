@@ -9,7 +9,6 @@ html {
 
 body {
     text-align: center;
-    padding-top: 52px;
     background: #fcfcfc;
     margin: 0;
     font-family: Verdana;
@@ -173,4 +172,45 @@ ul.erro {
 span.campo {
     color: #419453;
     font-weight: bold;
+}
+
+/* =================================== */
+
+html,body{
+    height: 100%
+}
+
+.logo {
+    margin-right: 10px;
+}
+
+
+.btn-space {
+    margin: 5px;
+}
+
+
+.erro {
+    background-color: #ffcccc;
+}
+
+
+#holder{
+    min-height: 100%;
+    position:relative;
+}
+
+
+#body{
+    padding-bottom: 50px; 
+}
+
+
+.footer{
+    color: white;
+    height: 50px; 
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
 }
