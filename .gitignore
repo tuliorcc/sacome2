@@ -1,10 +1,2 @@
 /dist/*
 /build/*
-/nbproject/*
-nbproject/private/private.properties
-nbproject/private/private.properties
-build/web/erro.jsp
-build/web/WEB-INF/classes/sacome/beans/Consulta.class
-build/web/WEB-INF/classes/sacome/dao/MedicoDAO.class
-nbproject/private/private.xml
-nbproject/project.properties
