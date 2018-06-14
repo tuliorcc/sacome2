@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Bolão da copa JSF</title>
+        <h:outputStylesheet library="css" name="default.css"/>
+    </h:head>
+    <h:body>
+        <h1>Nova Consulta</h1>
+        <hr />
+        <h:form>
+            
+            CPF:
+            <h:inputText id="cpf" label="Cpf" required="true" value="#{novaConsulta.dadosConsulta.cpf}" />
+            <h:message for="cpf"/>
+            <br/>
+
+
+            CRM:
+            <h:inputText id="crm" label="Crm" required="true" value="#{novaConsulta.dadosConsulta.crm}" />
+            <h:message for="crm"/>
+            <br/>
+
+
+            Data da consulta:
+            <h:inputText id="dataConsulta" label="Data da Consulta" value="#{novaConsulta.dadosConsulta.dataConsulta}">
+                <f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+            </h:inputText>
+            <h:message for="dataConsulta"/>
+            <br/>
+
+            <br/>
+            <h:commandButton id="submit" value="Submit" action="confirmarConsulta" />
+        </h:form>    
+    </h:body>
+</html>

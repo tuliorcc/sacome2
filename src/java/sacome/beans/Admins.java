@@ -5,11 +5,13 @@
  */
 package sacome.beans;
 
+import java.io.Serializable;
+
 /**
  *
  * @author tulio
  */
-public class Admins {
+public class Admins implements Serializable{
     private int id;
     private String nome, login, senha;
 

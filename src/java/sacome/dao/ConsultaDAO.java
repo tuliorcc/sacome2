@@ -14,6 +14,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.Resource;
+import javax.enterprise.context.RequestScoped;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import sacome.beans.Consulta;
@@ -23,6 +25,8 @@ import sacome.beans.Paciente;
  *
  * @author tulio
  */
+
+@RequestScoped
 public class ConsultaDAO {
     private final static String CRIAR_CONSULTA_SQL = "insert into Consulta"
             + " (cpf, crm, dataconsulta)"
@@ -48,12 +52,8 @@ public class ConsultaDAO {
             + " from Consulta c inner join Paciente p on c.cpf = p.cpf"
             + " where crm = ?";
 
+    @Resource(name = "jdbc/sacomeDBlocal")
     DataSource dataSource;
-
-
-    public ConsultaDAO(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
 
 
     public Consulta gravarConsulta(Consulta p) throws SQLException, NamingException {
