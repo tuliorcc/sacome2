@@ -7,6 +7,7 @@ package sacome.views;
 
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -16,6 +17,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
+import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.naming.NamingException;
@@ -34,13 +36,15 @@ public class NovaConsulta implements Serializable {
     @Resource(name = "jdbc/sacomeDBlocal")
     DataSource dataSource;
 
-
     Consulta dadosConsulta;
     @Inject MedicoDAO medicoDao;
     @Inject PacienteDAO pacienteDao;
     @Inject ConsultaDAO consultaDao;
     
-
+    UIInput cpfInput;
+    UIInput crmInput;
+    List<Consulta> consultaEncontrada;
+    
     public NovaConsulta() {
         dadosConsulta = new Consulta();
     }
@@ -57,6 +61,14 @@ public class NovaConsulta implements Serializable {
    
    public Consulta getDadosConsulta() {
         return dadosConsulta;
+    }
+
+   public UIInput getCpfInput() {
+        return cpfInput;
+    }
+   
+    public void setCpfInput(UIInput cpfInput) {
+        this.cpfInput = cpfInput;
     }
 
 
@@ -79,6 +91,29 @@ public class NovaConsulta implements Serializable {
 
        return recomecar();
    }
-   
+ 
+
+   public void validarConsulta(FacesContext context, UIComponent toValidate, Date value) throws SQLException, ValidatorException {
+       String Cpf = (String) cpfInput.getValue();
+       String Crm = (String) crmInput.getValue();
+       
+       // Procura consultas do paciente pelo cpf
+       consultaEncontrada = consultaDao.buscarConsultaPaciente(Cpf,
+                                                               value);    
+       if (consultaEncontrada == null) {
+            ((UIInput) toValidate).setValid(false);
+            FacesMessage message = new FacesMessage("Paciente já tem consulta agendada nesse horário!");
+            context.addMessage(toValidate.getClientId(context), message);
+        } 
+       
+       // Procura consultas do medico pelo crm
+       consultaEncontrada = consultaDao.buscarConsultaMedico(Crm,
+                                                               value);
+       if (consultaEncontrada == null) {
+            ((UIInput) toValidate).setValid(false);
+            FacesMessage message = new FacesMessage("Médico já tem consulta agendada nesse horário!");
+            context.addMessage(toValidate.getClientId(context), message);
+        } 
+    }
 
 }
