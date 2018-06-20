@@ -11,6 +11,8 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.inject.Inject;
@@ -67,4 +69,17 @@ public class NovoPaciente implements Serializable {
 
        return recomecar();
    }
+   
+   public void validarCpf(FacesContext context,
+            UIComponent toValidate,
+            String value) throws SQLException, NamingException {
+
+
+        if (pacienteDao.checarCPF(value)) {
+            ((UIInput) toValidate).setValid(false);
+            FacesMessage message = new FacesMessage("CPF já cadastrado!");
+            context.addMessage(toValidate.getClientId(context), message);
+        }
+    }    
+
 }

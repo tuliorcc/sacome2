@@ -18,7 +18,8 @@
             Digite os dados:<br/>
             
             CPF:
-            <h:inputText id="cpf" label="CPF" required="true" value="#{novoPaciente.dadosPaciente.cpf}" />
+            <h:inputText id="cpf" label="CPF" required="true" value="#{novoPaciente.dadosPaciente.cpf}" 
+                         validator="#{novoPaciente.validarCpf}"/>
             <h:message for="cpf"/>
             <br/>
             

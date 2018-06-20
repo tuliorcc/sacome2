@@ -7,6 +7,7 @@ package sacome.views;
 
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -16,6 +17,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
+import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.naming.NamingException;
@@ -34,13 +36,16 @@ public class NovaConsulta implements Serializable {
     @Resource(name = "jdbc/sacomeDBlocal")
     DataSource dataSource;
 
-
     Consulta dadosConsulta;
     @Inject MedicoDAO medicoDao;
     @Inject PacienteDAO pacienteDao;
     @Inject ConsultaDAO consultaDao;
     
-
+    UIInput cpfInput;
+    UIInput crmInput;
+    List<Consulta> consultaEncontradaPaciente;
+    List<Consulta> consultaEncontradaMedico;
+    
     public NovaConsulta() {
         dadosConsulta = new Consulta();
     }
@@ -57,6 +62,22 @@ public class NovaConsulta implements Serializable {
    
    public Consulta getDadosConsulta() {
         return dadosConsulta;
+    }
+
+   public UIInput getCpfInput() {
+        return cpfInput;
+    }
+   
+    public void setCpfInput(UIInput cpfInput) {
+        this.cpfInput = cpfInput;
+    }
+    
+   public UIInput getCrmInput() {
+        return crmInput;
+    }
+   
+    public void setCrmInput(UIInput crmInput) {
+        this.crmInput = crmInput;
     }
 
 
@@ -79,6 +100,52 @@ public class NovaConsulta implements Serializable {
 
        return recomecar();
    }
-   
+ 
 
+   public void validarConsulta(FacesContext context, UIComponent toValidate, Date value) throws SQLException, ValidatorException {
+       String Cpf = (String) cpfInput.getValue();
+       String Crm = (String) crmInput.getValue();
+       
+       // Procura consultas do paciente pelo cpf
+       consultaEncontradaPaciente = consultaDao.buscarConsultaPaciente(Cpf,
+                                                               value);    
+       if (consultaEncontradaPaciente != null) {
+            ((UIInput) toValidate).setValid(false);
+            FacesMessage message = new FacesMessage("Paciente já tem consulta agendada nesse horário! CPF = "+Cpf);
+            context.addMessage(toValidate.getClientId(context), message);
+        } 
+       
+       // Procura consultas do medico pelo crm
+       consultaEncontradaMedico = consultaDao.buscarConsultaMedico(Crm,
+                                                               value);
+       if (consultaEncontradaMedico != null) {
+            ((UIInput) toValidate).setValid(false);
+            FacesMessage message2 = new FacesMessage("Médico já tem consulta agendada nesse horário! CRM = "+Crm);
+            context.addMessage(toValidate.getClientId(context), message2);
+        } 
+    }
+
+      public void validarCpf(FacesContext context,
+            UIComponent toValidate,
+            String value) throws SQLException, NamingException {
+
+        if (!pacienteDao.checarCPF(value)) {
+            ((UIInput) toValidate).setValid(false);
+            FacesMessage message = new FacesMessage("CPF não cadastrado!");
+            context.addMessage(toValidate.getClientId(context), message);
+        }
+    } 
+      
+        public void validarCrm(FacesContext context,
+            UIComponent toValidate,
+            String value) throws SQLException, NamingException {
+
+        if (!medicoDao.checarCRM(value)) {
+            ((UIInput) toValidate).setValid(false);
+            FacesMessage message = new FacesMessage("CRM não cadastrado!");
+            context.addMessage(toValidate.getClientId(context), message);
+        }
+    } 
+   
+   
 }
