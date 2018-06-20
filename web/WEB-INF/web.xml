@@ -73,4 +73,13 @@
         <exception-type>java.lang.Exception</exception-type>
         <location>/faces/erro.xhtml</location>
     </error-page>
+    <filter>  
+    <filter-name>medsec</filter-name>  
+    <filter-class>sacome.filters.medicoFilter</filter-class>  
+    </filter>  
+
+    <filter-mapping>  
+    <filter-name>medsec</filter-name>  
+    <url-pattern>/faces/medicoDashboard.xhtml</url-pattern>  
+    </filter-mapping> 
 </web-app>

@@ -123,7 +123,6 @@ public class MedicoDAO {
     }
     
         public Boolean validarMedicoLogin(String crm, String senha) throws SQLException, NamingException {
-        boolean st = false;
         try (Connection con = dataSource.getConnection();
                           
             PreparedStatement ps = con.prepareStatement(MEDICO_VALIDAR_LOGIN_SQL)) {
@@ -131,13 +130,13 @@ public class MedicoDAO {
             ps.setString(2, senha); 
             
             try (ResultSet rs = ps.executeQuery()) {
-                st = rs.next();
+                if(rs.next()) return true;
 
             } catch (Exception e){
                 e.printStackTrace();
             }
           
-            return st;
+            return false;
         }
     }
 }
