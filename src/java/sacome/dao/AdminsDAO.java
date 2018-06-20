@@ -1,7 +1,9 @@
-
-// DAO Usuario
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package sacome.dao;
-
 
 import sacome.beans.Admins;
 import java.sql.Connection;
@@ -9,12 +11,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import javax.annotation.Resource;
+import javax.enterprise.context.RequestScoped;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 
+@RequestScoped
 public class AdminsDAO {
 
 
@@ -28,12 +31,8 @@ public class AdminsDAO {
             + " from admins"
             + " where login=? and senha=?";
     
+    @Resource(name = "jdbc/sacomeDBlocal")
     DataSource dataSource;
-
-
-    public AdminsDAO(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
     
     public Admins gravarAdmin(Admins u) throws SQLException, NamingException {
         try (Connection con = dataSource.getConnection();
@@ -52,25 +51,23 @@ public class AdminsDAO {
         return u;
     }
 
-    public Boolean validarAdminLogin(String login, String senha) throws SQLException, NamingException {
-        boolean st = false;
-        try (Connection con = dataSource.getConnection();
-                
-                
-            PreparedStatement ps = con.prepareStatement(ADMIN_VALIDAR_LOGIN_SQL)) {
-            ps.setString(1, login);
-            ps.setString(2, senha); 
-            
-            try (ResultSet rs = ps.executeQuery()) {
-                st = rs.next();
+    public Admins validarLogin(String login, String senha) throws SQLException, NamingException {
+    try (Connection con = dataSource.getConnection();
+        PreparedStatement ps = con.prepareStatement(ADMIN_VALIDAR_LOGIN_SQL)) {
+        ps.setString(1, login);
+        ps.setString(2, senha);
 
-            } catch (Exception e){
-                e.printStackTrace();
-            }
-          
-            return st;
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()) {
+            Admins u = new Admins();
+            u.setId(rs.getInt("id"));
+            u.setNome(rs.getString("nome"));
+            return u;
+        }else{
+            return null;
         }
     }
+}
     
     
     

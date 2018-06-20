@@ -16,48 +16,48 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.inject.Inject;
 import javax.naming.NamingException;
-import sacome.dao.MedicoDAO;
+import sacome.dao.PacienteDAO;
  
 @SessionScoped
 @Named
-public class loginMedico implements Serializable {
+public class loginPaciente implements Serializable {
  
- private String crm;
+ private String cpf;
  private String senha;
-@Inject MedicoDAO medicoDao;
+@Inject PacienteDAO pacienteDAO;
      
  public void login() throws SQLException, NamingException {
          
     FacesContext context = FacesContext.getCurrentInstance();
     Flash flash = context.getExternalContext().getFlash();
        flash.setKeepMessages(true);
-    Medico medico = medicoDao.validarLogin(this.crm, this.senha);
-    if(medico != null){
-       context.getExternalContext().getSessionMap().put("medCRM", medico.getCrm());
-       context.getExternalContext().getSessionMap().put("medNome", medico.getNome());
+    Paciente paciente = pacienteDAO.validarLogin(this.cpf, this.senha);
+    if(paciente != null){
+       context.getExternalContext().getSessionMap().put("pacCPF", paciente.getCpf());
+       context.getExternalContext().getSessionMap().put("pacNome", paciente.getNome());
        try {
-           context.getExternalContext().redirect("medicoDashboard.xhtml");
+           context.getExternalContext().redirect("pacienteDashboard.xhtml");
        } catch (IOException e) {
            e.printStackTrace();
        }
     }else{
-        context.addMessage("loginForm:login", new FacesMessage("Credenciais inválidas. Verifique o CRM e senha informados."));
+        context.addMessage("loginForm:login", new FacesMessage("Credenciais inválidas. Verifique o CPF e senha informados."));
     } 
 }
  
 public void logout() throws IOException {
    FacesContext context = FacesContext.getCurrentInstance();
-   context.getExternalContext().getSessionMap().remove("medCRM");
-   context.getExternalContext().getSessionMap().remove("medNome");
-   context.getExternalContext().redirect("medicoLogin.xhtml");
+   context.getExternalContext().getSessionMap().remove("pacCPF");
+   context.getExternalContext().getSessionMap().remove("pacNome");
+   context.getExternalContext().redirect("pacienteLogin.xhtml");
 }
         
- public String getCrm() {
- return crm;
+ public String getCpf() {
+ return cpf;
  }
  
- public void setCrm(String crm) {
- this.crm = crm;
+ public void setCpf(String cpf) {
+ this.cpf = cpf;
  }
  
  public String getSenha() {

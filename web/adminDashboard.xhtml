@@ -11,14 +11,18 @@
     <h:body>
     <ui:composition template="./template.xhtml">
     <ui:define name="content">
-        <h1>Área do Médico</h1>
+        <h1>Administração</h1>
         <hr />
-    <h:panelGroup rendered="#{not empty medCRM}">
-        <h3>Bem-vindo, #{medNome}!</h3>
+    <h:panelGroup rendered="#{not empty admID}">
+        <h3>Bem-vindo, #{admNome}!</h3>
         <h:form>
-            <h:commandButton value="Sair" action="#{loginMedico.logout}" />
+            <h:commandButton value="Sair" action="#{loginAdmin.logout}" />
         </h:form>
-        <h4>Verifique abaixo suas consultas agendadas:</h4>
+        <hr/>
+        <h:form>
+            <h:commandLink action="medicoForm">Cadastrar Médico</h:commandLink><br/>
+            <h:commandLink action="pacienteForm">Cadastrar Paciente</h:commandLink>
+        </h:form>
     </h:panelGroup>
     </ui:define>     
     </ui:composition>     

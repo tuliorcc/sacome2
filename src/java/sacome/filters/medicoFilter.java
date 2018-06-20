@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package filters;
+package sacome.filters;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -109,7 +109,7 @@ public class medicoFilter implements Filter {
      
      String loginURI = request.getContextPath() + "/faces/medicoLogin.xhtml";
  
-     boolean loggedIn = session != null && session.getAttribute("medico") != null;
+     boolean loggedIn = session != null && session.getAttribute("medCRM") != null;
      boolean loginRequest = request.getRequestURI().equals(loginURI);
      boolean resourceRequest = request.getRequestURI().startsWith(request.getContextPath() + ResourceHandler.RESOURCE_IDENTIFIER);
  

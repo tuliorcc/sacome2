@@ -8,9 +8,9 @@
         <ui:composition template="./template.xhtml">
             <ui:define name="content">
         <h:form>
-            Filtrar por Especialidade:            
-            <h:selectOneMenu id="especialidade" value="especialidade" binding="#{input1}">
-                <f:selectItem itemValue="" itemLabel="--Todos--"/>
+            Selecione a Especialidade:            
+            <h:selectOneMenu id="especialidade" value="#{especialidade}" binding="#{input1}">
+                <f:selectItem itemValue="" itemLabel="- Qualquer -"/>
                 <f:selectItem itemValue="Clínico Geral" itemLabel="Clínico Geral"/>
                 <f:selectItem itemValue="Acupuntura" itemLabel="Acupuntura"/>
                 <f:selectItem itemValue="Cardiologia" itemLabel="Cardiologia"/>
@@ -25,11 +25,9 @@
                 <f:selectItem itemValue="Pneumologia" itemLabel="Pneumologia"/>   
                 <f:selectItem itemValue="Urologia" itemLabel="Urologia"/>   
             </h:selectOneMenu>
-            <br/>
-            <h:commandLink action="#{listaMedicos.verTodosMedicos(input1.value)}">Filtrar</h:commandLink><br/>
-            
+            <h:commandButton value="Listar Médicos" action="#{listaMedicos.verTodosMedicos(input1.value)}" />
         </h:form>
-        <br/><br/>
+        <hr/>
         <h:form>
             <h:dataTable id="medicos"
                          summary="Medicos Cadastrados"

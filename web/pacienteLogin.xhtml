@@ -11,18 +11,18 @@
     <h:body>
     <ui:composition template="./template.xhtml">
     <ui:define name="content">
-        <h1>Área do Médico</h1>
+        <h1>Área do Paciente</h1>
         <hr />
         <h:form id="loginForm">
-            <h4>Informe seu CRM e senha para acessar a Área do Médico:</h4>
+            <h4>Informe seu CPF e senha para acessar a Área do Paciente:</h4>
             <br/>
-            CRM:
-            <h:inputText id="crm" required="true" value="#{loginMedico.crm}" />
+            CPF
+            <h:inputText id="cpf" required="true" value="#{loginPaciente.cpf}" />
             <br/>
             Senha:
-            <h:inputSecret id="senha" required="true" value="#{loginMedico.senha}" />  
+            <h:inputSecret id="senha" required="true" value="#{loginPaciente.senha}" />  
             <br/>
-            <h:commandButton id="login" value="Acessar" action="#{loginMedico.login}" />
+            <h:commandButton id="login" value="Acessar" action="#{loginPaciente.login}" />
             <br/>
             <h:message for="crm"/>
             <br/>
