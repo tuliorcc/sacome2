@@ -125,4 +125,27 @@ public class NovaConsulta implements Serializable {
         } 
     }
 
+      public void validarCpf(FacesContext context,
+            UIComponent toValidate,
+            String value) throws SQLException, NamingException {
+
+        if (!pacienteDao.checarCPF(value)) {
+            ((UIInput) toValidate).setValid(false);
+            FacesMessage message = new FacesMessage("CPF não cadastrado!");
+            context.addMessage(toValidate.getClientId(context), message);
+        }
+    } 
+      
+        public void validarCrm(FacesContext context,
+            UIComponent toValidate,
+            String value) throws SQLException, NamingException {
+
+        if (!medicoDao.checarCRM(value)) {
+            ((UIInput) toValidate).setValid(false);
+            FacesMessage message = new FacesMessage("CRM não cadastrado!");
+            context.addMessage(toValidate.getClientId(context), message);
+        }
+    } 
+   
+   
 }

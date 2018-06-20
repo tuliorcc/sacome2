@@ -17,7 +17,8 @@
             Digite os dados:<br/>
             
             CRM:
-            <h:inputText id="crm" label="CRM" required="true" value="#{novoMedico.dadosMedico.crm}" />
+            <h:inputText id="crm" label="CRM" required="true" value="#{novoMedico.dadosMedico.crm}" 
+                         validator="#{novoMedico.validarCrm}"/>
             <h:message for="crm"/>
             <br/>
             

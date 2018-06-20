@@ -13,15 +13,19 @@
         <h:form>
             
             CPF:
-            <h:inputText id="cpf" label="Cpf" required="true" binding="#{novaConsulta.cpfInput}"
-                         value="#{novaConsulta.dadosConsulta.cpf}"/>
+            <h:inputText id="cpf" label="Cpf" required="true" 
+                         binding="#{novaConsulta.cpfInput}"
+                         value="#{novaConsulta.dadosConsulta.cpf}"
+                         validator="#{novaConsulta.validarCpf}"/>
             <h:message for="cpf"/>
             <br/>
 
 
             CRM:
-            <h:inputText id="crm" label="Crm" required="true" binding="#{novaConsulta.crmInput}"
-                         value="#{novaConsulta.dadosConsulta.crm}" />
+            <h:inputText id="crm" label="Crm" required="true" 
+                         binding="#{novaConsulta.crmInput}"
+                         value="#{novaConsulta.dadosConsulta.crm}" 
+                         validator="#{novaConsulta.validarCrm}"/>
             <h:message for="crm"/>
             <br/>
 
