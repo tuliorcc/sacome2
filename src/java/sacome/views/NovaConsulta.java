@@ -43,7 +43,8 @@ public class NovaConsulta implements Serializable {
     
     UIInput cpfInput;
     UIInput crmInput;
-    List<Consulta> consultaEncontrada;
+    List<Consulta> consultaEncontradaPaciente;
+    List<Consulta> consultaEncontradaMedico;
     
     public NovaConsulta() {
         dadosConsulta = new Consulta();
@@ -69,6 +70,14 @@ public class NovaConsulta implements Serializable {
    
     public void setCpfInput(UIInput cpfInput) {
         this.cpfInput = cpfInput;
+    }
+    
+   public UIInput getCrmInput() {
+        return crmInput;
+    }
+   
+    public void setCrmInput(UIInput crmInput) {
+        this.crmInput = crmInput;
     }
 
 
@@ -98,21 +107,21 @@ public class NovaConsulta implements Serializable {
        String Crm = (String) crmInput.getValue();
        
        // Procura consultas do paciente pelo cpf
-       consultaEncontrada = consultaDao.buscarConsultaPaciente(Cpf,
+       consultaEncontradaPaciente = consultaDao.buscarConsultaPaciente(Cpf,
                                                                value);    
-       if (consultaEncontrada == null) {
+       if (consultaEncontradaPaciente != null) {
             ((UIInput) toValidate).setValid(false);
-            FacesMessage message = new FacesMessage("Paciente já tem consulta agendada nesse horário!");
+            FacesMessage message = new FacesMessage("Paciente já tem consulta agendada nesse horário! CPF = "+Cpf);
             context.addMessage(toValidate.getClientId(context), message);
         } 
        
        // Procura consultas do medico pelo crm
-       consultaEncontrada = consultaDao.buscarConsultaMedico(Crm,
+       consultaEncontradaMedico = consultaDao.buscarConsultaMedico(Crm,
                                                                value);
-       if (consultaEncontrada == null) {
+       if (consultaEncontradaMedico != null) {
             ((UIInput) toValidate).setValid(false);
-            FacesMessage message = new FacesMessage("Médico já tem consulta agendada nesse horário!");
-            context.addMessage(toValidate.getClientId(context), message);
+            FacesMessage message2 = new FacesMessage("Médico já tem consulta agendada nesse horário! CRM = "+Crm);
+            context.addMessage(toValidate.getClientId(context), message2);
         } 
     }
 
