@@ -122,23 +122,22 @@ public class MedicoDAO {
         return ret;
     }
     
-        public Boolean validarMedicoLogin(String crm, String senha) throws SQLException, NamingException {
-        boolean st = false;
-        try (Connection con = dataSource.getConnection();
-                          
-            PreparedStatement ps = con.prepareStatement(MEDICO_VALIDAR_LOGIN_SQL)) {
-            ps.setString(1, crm);
-            ps.setString(2, senha); 
-            
-            try (ResultSet rs = ps.executeQuery()) {
-                st = rs.next();
+    public Medico validarLogin(String crm, String senha) throws SQLException, NamingException {
+    try (Connection con = dataSource.getConnection();
+        PreparedStatement ps = con.prepareStatement(MEDICO_VALIDAR_LOGIN_SQL)) {
+        ps.setString(1, crm);
+        ps.setString(2, senha);
 
-            } catch (Exception e){
-                e.printStackTrace();
-            }
-          
-            return st;
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()) {
+            Medico u = new Medico();
+            u.setCrm(rs.getString("crm"));
+            u.setNome(rs.getString("nome"));
+            return u;
+        }else{
+            return null;
         }
     }
+}
 }
 

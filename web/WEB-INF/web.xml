@@ -5,46 +5,6 @@
         <param-value>Development</param-value>
     </context-param>
     <servlet>
-        <servlet-name>AddMedicoServlet</servlet-name>
-        <servlet-class>sacome.servlets.AddMedicoServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>GravarMedicoServlet</servlet-name>
-        <servlet-class>sacome.servlets.GravarMedicoServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AddPacienteServlet</servlet-name>
-        <servlet-class>sacome.servlets.AddPacienteServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>GravarPacienteServlet</servlet-name>
-        <servlet-class>sacome.servlets.GravarPacienteServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>VerMedicosServlet</servlet-name>
-        <servlet-class>sacome.servlets.VerMedicosServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AdminLoginServlet</servlet-name>
-        <servlet-class>sacome.servlets.AdminLoginServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>PacienteLoginServlet</servlet-name>
-        <servlet-class>sacome.servlets.PacienteLoginServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>MedicoLoginServlet</servlet-name>
-        <servlet-class>sacome.servlets.MedicoLoginServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>GravarConsultaServlet</servlet-name>
-        <servlet-class>sacome.servlets.GravarConsultaServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AddConsultaServlet</servlet-name>
-        <servlet-class>sacome.servlets.AddConsultaServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
@@ -61,7 +21,8 @@
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
-     <error-page>
+    
+    <error-page>
         <error-code>404</error-code>
         <location>/faces/erro.xhtml</location>
     </error-page>
@@ -73,4 +34,29 @@
         <exception-type>java.lang.Exception</exception-type>
         <location>/faces/erro.xhtml</location>
     </error-page>
+    
+    <filter>  
+        <filter-name>medsec</filter-name>  
+        <filter-class>sacome.filters.medicoFilter</filter-class>  
+    </filter>
+    <filter-mapping>  
+        <filter-name>medsec</filter-name>  
+        <url-pattern>/faces/medicoDashboard.xhtml</url-pattern>  
+    </filter-mapping> 
+    <filter>  
+        <filter-name>pacsec</filter-name>  
+        <filter-class>sacome.filters.pacienteFilter</filter-class>  
+    </filter>
+    <filter-mapping>  
+        <filter-name>pacsec</filter-name>  
+        <url-pattern>/faces/pacienteDashboard.xhtml</url-pattern>  
+    </filter-mapping> 
+    <filter>  
+        <filter-name>admsec</filter-name>  
+        <filter-class>sacome.filters.adminFilter</filter-class>  
+    </filter>
+    <filter-mapping>  
+        <filter-name>admsec</filter-name>  
+        <url-pattern>/faces/adminDashboard.xhtml</url-pattern>  
+    </filter-mapping> 
 </web-app>

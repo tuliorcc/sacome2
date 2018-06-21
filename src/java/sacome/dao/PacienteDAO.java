@@ -75,22 +75,22 @@ public class PacienteDAO {
         return ret;
     }
     
-    public Boolean validarPacienteLogin(String cpf, String senha) throws SQLException, NamingException {
-        boolean st = false;
+    public Paciente validarLogin(String cpf, String senha) throws SQLException, NamingException {
         try (Connection con = dataSource.getConnection();
                           
             PreparedStatement ps = con.prepareStatement(PACIENTE_VALIDAR_LOGIN_SQL)) {
             ps.setString(1, cpf);
             ps.setString(2, senha); 
             
-            try (ResultSet rs = ps.executeQuery()) {
-                st = rs.next();
-
-            } catch (Exception e){
-                e.printStackTrace();
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                Paciente u = new Paciente();
+                u.setCpf(rs.getString("cpf"));
+                u.setNome(rs.getString("nome"));
+                return u;
+            }else{
+                return null;
             }
-          
-            return st;
         }
     }
 }
